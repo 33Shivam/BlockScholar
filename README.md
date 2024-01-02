@@ -1,4 +1,4 @@
-## Do Add your timeline docx if you are contributing
+## Project Name Dundhna hai 
 use git clone https://github.com/33Shivam/BlockScholar to get started
 Current Goals 
 1. Figuring Project structure this includes all parties involved and all stacks used to deal with them
