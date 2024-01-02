@@ -4,3 +4,5 @@ Current Goals
 1. Figuring Project structure this includes all parties involved and all stacks used to deal with them
 2. Setting up backend
 3. Documenting devlpoment stages this included any errors we maybe facing
+4. Designing the frontEnd on figma
+
