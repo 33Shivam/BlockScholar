@@ -2,9 +2,9 @@
 use git clone https://github.com/33Shivam/BlockScholar to get started
 
 ####Useful Links:-
-https://www.researchgate.net/publication/373603201_CryptoScholarChain_Revolutionizing_Scholarship_Management_Framework_with_Blockchain_Technology
-https://github.com/shyan179/ScholarshipDisbursementRinkeby
-https://trufflesuite.com/ganache/
+1. https://www.researchgate.net/publication/373603201_CryptoScholarChain_Revolutionizing_Scholarship_Management_Framework_with_Blockchain_Technology
+2. https://github.com/shyan179/ScholarshipDisbursementRinkeby
+3. https://trufflesuite.com/ganache/
 
 
 Current Goals 
