@@ -14,3 +14,4 @@ Current Goals
 4. Designing the frontEnd on figma
 
 
+##Current task is to develop contract , frontend and backend for student to push their data on chain
