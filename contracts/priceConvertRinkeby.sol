@@ -27,24 +27,22 @@ contract PriceConversion {
     function getUSDETH() internal view returns (uint256) {
         (
             ,
-            /*uint80 roundID*/ int256 price,
+            /*uint80 roundID*/ int256 price /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/,
             ,
             ,
 
-        ) = /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/
-            priceUSDETH.latestRoundData();
+        ) = priceUSDETH.latestRoundData();
         return uint256(price);
     }
 
     function getGBPUSD() internal view returns (uint256) {
         (
             ,
-            /*uint80 roundID*/ int256 price,
+            /*uint80 roundID*/ int256 price /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/,
             ,
             ,
 
-        ) = /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/
-            priceGBPUSD.latestRoundData();
+        ) = priceGBPUSD.latestRoundData();
         return uint256(price);
     }
 
