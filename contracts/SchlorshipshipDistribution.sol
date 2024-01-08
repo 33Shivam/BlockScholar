@@ -64,9 +64,9 @@ contract ScholarDetails {
         uint256 _AvgMark
     ) public payable {
         //Convert the amount from GBP to wei
-        PriceConversion p = PriceConversion(PriceContractAdd);
-        uint256 cvrAmt = p.getGBPWEI(_Amount);
-        // uint256 cvrAmt = (_Amount)*62539;
+        // PriceConversion p = PriceConversion(PriceContractAdd);
+        // uint256 cvrAmt = p.getGBPWEI(_Amount);
+        uint256 cvrAmt = (_Amount) * 62539;
 
         //Show error if there is not enough balance to offer the scholarship
         require(
