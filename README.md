@@ -12,6 +12,7 @@ Current Goals
 2. Setting up backend
 3. Documenting devlpoment stages this included any errors we maybe facing
 4. Designing the frontEnd on figma
+5. Setting up auth using metamask
 
 
 ##Current task is to develop contract , frontend and backend for student to push their data on chain
