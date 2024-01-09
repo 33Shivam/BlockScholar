@@ -5,7 +5,8 @@ use git clone https://github.com/33Shivam/BlockScholar to get started
 1. https://www.researchgate.net/publication/373603201_CryptoScholarChain_Revolutionizing_Scholarship_Management_Framework_with_Blockchain_Technology
 2. https://github.com/shyan179/ScholarshipDisbursementRinkeby
 3. https://trufflesuite.com/ganache/
-4. https://www.youtube.com/watch?v=nHjmorrYDj0
+4. https://www.youtube.com/watch?v=nHjmorrYDj0  JWT AUTH  
+5. https://youtu.be/b_k8yDC3hdM?si=cockwHEBo_wbql3S  Integration of SC with FrontEnd
 
 
 Current Goals 
