@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "client/build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "extensions": {
+    "moralis-auth": "moralis/moralis-auth@0.1.7"
+  }
+}
