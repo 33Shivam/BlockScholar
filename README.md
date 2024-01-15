@@ -15,6 +15,7 @@ Current Goals
 3. Documenting devlpoment stages this included any errors we maybe facing
 4. Designing the frontEnd on figma
 5. Setting up auth using metamask
+6. Using Moralis and Integrating it with Firebase Database
 
 
 ##Current task is to develop contract , frontend and backend for student to push their data on chain
