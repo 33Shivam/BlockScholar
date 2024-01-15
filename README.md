@@ -7,6 +7,7 @@ use git clone https://github.com/33Shivam/BlockScholar to get started
 3. https://trufflesuite.com/ganache/
 4. https://www.youtube.com/watch?v=nHjmorrYDj0  JWT AUTH  
 5. https://youtu.be/b_k8yDC3hdM?si=cockwHEBo_wbql3S  Integration of SC with FrontEnd
+6. https://docs.moralis.io/authentication-api/evm/how-to-authenticate-users-with-metamask-using-react  Moralis 
 
 
 Current Goals 
