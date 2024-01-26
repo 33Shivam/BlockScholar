@@ -9,8 +9,7 @@ import Staffs from '../../../lib/staffSchema';
 export default NextAuth({
     providers: [MoralisNextAuthProvider()],
     // adding user info to the user session object
-    callbacks: {      
-       
+    callbacks: {            
        
              async jwt({ token, user }) {
             if (user) {

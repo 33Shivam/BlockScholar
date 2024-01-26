@@ -1,5 +1,5 @@
-var Sample = artifacts.require("./StudentDetailsContract.sol");
+var Student = artifacts.require("./StuDetails.sol");
 
 module.exports = function(deployer) {
-    deployer.deploy(Sample);
+    deployer.deploy(Student);
 };

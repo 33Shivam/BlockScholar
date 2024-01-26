@@ -3,9 +3,13 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 contract SampleContract {
-    int32 myUint;
+    uint256 a;
 
-    function setter(int32 _myUint) public {
-        myUint = _myUint;
+    function setter(uint256 _a) public {
+        a = _a;
+    }
+
+    function getter() public view returns (uint256) {
+        return a;
     }
 }
