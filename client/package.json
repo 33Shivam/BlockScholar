@@ -1,40 +1,27 @@
 {
-  "name": "client",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@radix-ui/themes": "^2.0.3",
-    "axios": "^1.6.5",
-    "ethers": "^6.9.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.2",
-    "viem": "^2.0.10",
-    "wagmi": "^2.2.1",
-    "@moralisweb3/client-firebase-auth-utils": "^2.6.4",
-    "@moralisweb3/client-firebase-evm-auth": "^2.6.4",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.11.0",
-    "moralis": "^2.6.4",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
-  }
+    "name": "nextjs_moralis_auth",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@moralisweb3/next": "^2.9.0",
+        "axios": "^1.6.7",
+        "ethers": "^5.6.9",
+        "mongoose": "^6.12.6",
+        "moralis": "^2.9.0",
+        "next": "^13.0.5",
+        "next-auth": "^4.10.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "wagmi": "^0.6.1"
+    },
+    "devDependencies": {
+        "@types/react": "18.0.25",
+        "typescript": "4.9.3"
+    }
 }
