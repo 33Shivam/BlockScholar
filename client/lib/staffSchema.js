@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const staffSchema = new mongoose.Schema(
     {
         profileId: {
             type: String,
@@ -9,12 +9,11 @@ const userSchema = new mongoose.Schema(
         address: {
             type: String,
             
-        },   
-        accountType: {
-            type: String,
-                      
         },
-       
+        type: {
+            type: String,
+            default: "defaultSTAFF",
+        },
         bio:{
             type: String,
             default: "NO BIO",
@@ -22,5 +21,5 @@ const userSchema = new mongoose.Schema(
             {timestamps: true}
     );
 
-        let Users = mongoose.models.user || mongoose.model("user", userSchema);
-        export default Users;   
+        let Staffs = mongoose.models.user || mongoose.model("staff", staffSchema);
+        export default Staffs;   

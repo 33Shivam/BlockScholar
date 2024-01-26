@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const studentSchema = new mongoose.Schema(
     {
         profileId: {
             type: String,
@@ -9,12 +9,7 @@ const userSchema = new mongoose.Schema(
         address: {
             type: String,
             
-        },   
-        accountType: {
-            type: String,
-                      
         },
-       
         bio:{
             type: String,
             default: "NO BIO",
@@ -22,5 +17,5 @@ const userSchema = new mongoose.Schema(
             {timestamps: true}
     );
 
-        let Users = mongoose.models.user || mongoose.model("user", userSchema);
-        export default Users;   
+        let Students = mongoose.models.user || mongoose.model("student", studentSchema);
+        export default Students;   

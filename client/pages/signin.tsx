@@ -12,7 +12,7 @@ function SignIn() {
     const { requestChallengeAsync } = useAuthRequestChallengeEvm();
     const { push } = useRouter();
 
-    const handleAuth = async () => {
+    const handleAuthStudent = async () => {
         if (isConnected) {
             await disconnectAsync();
         }
@@ -24,9 +24,47 @@ function SignIn() {
         const signature = await signMessageAsync({ message });
 
         // redirect user after success authentication to '/user' page
-        const { url } = await signIn('moralis-auth', { message, signature, redirect: false, callbackUrl: '/user' });
+        const { url } = await signIn('moralis-auth', { message, signature, redirect: false, callbackUrl: '/student' });
         /**
-         * instead of using signIn(..., redirect: "/user")
+         * instead of using signIn(..., redirect: "/student")
+         * we get the url from callback and push it to the router to avoid page refreshing
+         */
+        push(url);
+    };
+    
+    const handleAuthStaff = async () => {
+        if (isConnected) {
+            await disconnectAsync();
+        }
+
+        const { account, chain } = await connectAsync({ connector: new MetaMaskConnector() });
+
+        const { message } = await requestChallengeAsync({ address: account, chainId: chain.id });
+
+        const signature = await signMessageAsync({ message });
+
+        // redirect user after success authentication to '/user' page
+        const { url } = await signIn('moralis-auth', { message, signature, redirect: false, callbackUrl: '/staff' });
+        /**
+         * instead of using signIn(..., redirect: "/staff")
+         * we get the url from callback and push it to the router to avoid page refreshing
+         */
+        push(url);
+    };const handleAuthDistributor = async () => {
+        if (isConnected) {
+            await disconnectAsync();
+        }
+
+        const { account, chain } = await connectAsync({ connector: new MetaMaskConnector() });
+
+        const { message } = await requestChallengeAsync({ address: account, chainId: chain.id });
+
+        const signature = await signMessageAsync({ message });
+
+        // redirect user after success authentication to '/user' page
+        const { url } = await signIn('moralis-auth', { message, signature, redirect: false, callbackUrl: '/ssDistributor' });
+        /**
+         * instead of using signIn(..., redirect: "/ssDistributor")
          * we get the url from callback and push it to the router to avoid page refreshing
          */
         push(url);
@@ -35,7 +73,9 @@ function SignIn() {
     return (
         <div>
             <h3>Web3 Authentication</h3>
-            <button onClick={handleAuth}>Authenticate via Metamask</button>
+            <button onClick={handleAuthStudent}>Student</button>
+            <button onClick={handleAuthStaff}>Staff</button>
+            <button onClick={handleAuthDistributor}>Distributor</button>           
         </div>
     );
 }
