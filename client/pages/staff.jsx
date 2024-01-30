@@ -4,7 +4,7 @@ import Users from "../lib/userSchema";
 import { useState } from "react";
 import axios from "axios";
 
-function User({ user, bio }) {
+function Staff({ user, bio }) {
   //   console.log(user);
 
   const [value, changeValue] = useState("");
@@ -29,7 +29,7 @@ function User({ user, bio }) {
       <h4>User session:</h4>
       {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
       <div>bio: {bio}</div>
-      <div>Address: {user.address}</div>
+      {/* <div>Address: {user.address}</div> */}
       <br />
       <input
         onChange={(e) => changeValue(e.target.value)}
@@ -65,4 +65,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default User;
+export default Staff;

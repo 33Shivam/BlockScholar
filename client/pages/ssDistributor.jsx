@@ -3,48 +3,46 @@ import connectDB from "../lib/connectDB";
 import Users from "../lib/userSchema";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import SimpleStorage from "../src/contracts/SampleContract.json";
-import Web3 from "web3";
 
 function User({ user, bio }) {
   //web3JS
-  const [state, setState] = useState({
-    web3: null,
-    contract: null,
-  });
-  const [data, setData] = useState("0");
-  useEffect(() => {
-    const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
+  // const [state, setState] = useState({
+  //   web3: null,
+  //   contract: null,
+  // });
+  // const [data, setData] = useState("0");
+  // useEffect(() => {
+  //   const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
 
-    async function template() {
-      const web3 = new Web3(provider);
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorage.networks[networkId];
-      const contract = new web3.eth.Contract(
-        SimpleStorage.abi,
-        deployedNetwork.address
-      );
-      console.log(contract);
-      setState({ web3: web3, contract: contract });
-    }
-    provider && template();
-  }, []);
-  useEffect(() => {
-    const { contract } = state;
-    async function readData() {
-      const data = await contract.methods.getter().call();
-      setData(data);
-    }
-    contract && readData();
-  }, [state]);
-  async function writeData() {
-    const { contract } = state;
-    // const data = document.querySelector("#value").value;
-    await contract.methods
-      .setter(100000000000)
-      .send({ from: "0x487D6C2069A63FCf4e435613CB3ee63219d189b5" });
-    window.location.reload();
-  }
+  //   async function template() {
+  //     const web3 = new Web3(provider);
+  //     const networkId = await web3.eth.net.getId();
+  //     const deployedNetwork = SimpleStorage.networks[networkId];
+  //     const contract = new web3.eth.Contract(
+  //       SimpleStorage.abi,
+  //       deployedNetwork.address
+  //     );
+  //     console.log(contract);
+  //     setState({ web3: web3, contract: contract });
+  //   }
+  //   provider && template();
+  // }, []);
+  // useEffect(() => {
+  //   const { contract } = state;
+  //   async function readData() {
+  //     const data = await contract.methods.getter().call();
+  //     setData(data);
+  //   }
+  //   contract && readData();
+  // }, [state]);
+  // async function writeData() {
+  //   const { contract } = state;
+  //   // const data = document.querySelector("#value").value;
+  //   await contract.methods
+  //     .setter(100000000000)
+  //     .send({ from: "0x487D6C2069A63FCf4e435613CB3ee63219d189b5" });
+  //   window.location.reload();
+  // }
 
   //web3JS ends
 

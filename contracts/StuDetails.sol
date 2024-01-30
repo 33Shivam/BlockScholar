@@ -29,6 +29,10 @@ contract StuDetails {
             stuRecords[_ID].ID != _ID,
             "____Student ID already registered and cannot be altered____"
         );
+        require(
+            stuRecords[_ID].Address != msg.sender,
+            "Address already used to store data"
+        );
         // Get the student address
         stuAdd = msg.sender;
 
@@ -59,6 +63,7 @@ contract StuDetails {
         string memory FirstName = stuRecords[_ID].FirstName;
         string memory LastName = stuRecords[_ID].LastName;
         address payable Address = stuRecords[_ID].Address;
+
         return (ID, FirstName, LastName, Address);
     }
 }

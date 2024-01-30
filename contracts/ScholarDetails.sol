@@ -1,18 +1,15 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity >=0.8.2 <0.9.0;
-import "./priceConvertRinkeby.sol";
-import "./StudentDetailsContract.sol";
+import "./StuDetails.sol";
 
 contract ScholarDetails {
-    //Get the addresses of another 3 contracts
-    address PriceContractAdd; //this only relevant for running on rinkeby testnet to get value in GBP
+    //Get the addresses of another 2 contracts
     address StuContractAdd;
     address payable StaffContractAdd;
 
-    constructor(address _StuContractAdd, address _PriceContractAdd) payable {
+    constructor(address _StuContractAdd) payable {
         StuContractAdd = _StuContractAdd;
-        PriceContractAdd = _PriceContractAdd;
     }
 
     function storeContractAdd(address payable _StaffContractAdd) public {
@@ -31,12 +28,10 @@ contract ScholarDetails {
     }
 
     //view the amount converted
-    function viewGBPWEI(uint256 _number) public view returns (uint256) {
-        // PriceConversion p = PriceConversion(PriceContractAdd);
-        // uint256 price = p.getGBPWEI(_number);
-        uint256 price = (_number) * 62539;
-        return price;
-    }
+    // function  viewGBPWEI(uint256 _number) public pure view  returns (uint256) {
+    // 	uint256 price = (_number)*62539;
+    //     return price;
+    // }
 
     // defining scholarship details struct
     struct Scholarship {
