@@ -1,5 +1,3 @@
-
-
 const hre = require("hardhat");
 const fs = require('fs');
 const ethers = hre.ethers;
@@ -39,12 +37,6 @@ async function main() {
   
 }
 main()
-// .then((addresses) => {
-//   fs.writeFileSync("programming.txt", data);
-//   // Write contract addresses to a file
-  // fs.writeFileSync("contractAddresses.json", JSON.stringify(addresses, null, 2));
-//   console.log("Contract addresses written to contractAddresses.json file:", addresses);
-// })
 .catch((error) => {
   console.error(error);
   process.exitCode = 1;

@@ -81,11 +81,10 @@ function Student({ user, bio }) {
     const ID = document.querySelector("#ID").value;
     const firstName = document.querySelector("#firstName").value;
     const lastName = document.querySelector("#lastName").value;
-    console.log(ID, firstName, lastName, contract);
     const tx = await contract.addStuRecords(ID, firstName, lastName);
     await tx.wait();
     console.log("Transaction Mined");
-    const details = await contract.getStuDetails(3);
+    const details = await contract.getStuDetails(ID);
     console.log(details);
   };
   return (

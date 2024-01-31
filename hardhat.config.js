@@ -16,6 +16,10 @@ module.exports = {
     ganache: {
       url: "http://127.0.0.1:7545",
       accounts: [PRIVATE_KEY_GANACHE],
+  },hardhat: {
+    forking: {
+      url: GOERLI_URL,
+    }
   },
   },
 };

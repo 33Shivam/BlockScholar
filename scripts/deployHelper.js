@@ -30,7 +30,7 @@ async function main() {
   console.log("Before buying chai");
   await cosoleBalances(addresses);
 
-  // const amount = { value: hre.ethers.parseEther("10") };
+  const amount = { value: hre.ethers.parseEther("10") };
   await contract.connect(from1).addStuRecords(1, "Shivam", "Anand");
   await contract.connect(from2).addStuRecords(2, "Satyam", "Anand");
   await contract

@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import abi from "../src/contracts/ScholarDetails.json";
 import { ethers } from "ethers";
-import { useConnect } from "wagmi";
 import DisContractAddress from "../../contractAddresses.json";
 
 function Distributor({ user, bio }) {
@@ -81,7 +80,7 @@ function Distributor({ user, bio }) {
     const { contract } = state;
     const ID = document.querySelector("#ID").value;
     const ScholarshipName = document.querySelector("#SSName").value;
-    const ScholarshipAmount = document.querySelector("#SSAmt").value;
+    const ScholarshipAmount = document.querySelector("#SSAmt").value; //100000000000000
     const Attendance = document.querySelector("#Atn").value;
     const AvgMarks = document.querySelector("#AvgMarks").value;
     console.log(ID, ScholarshipName, ScholarshipAmount, Attendance, AvgMarks);
@@ -93,7 +92,8 @@ function Distributor({ user, bio }) {
       AvgMarks
     );
     await tx.wait();
-    console.log("Transaction Mined");
+    const details = await contract.getSchlDetails(ID);
+    console.log(details);
   };
   return (
     <div>
@@ -107,18 +107,26 @@ function Distributor({ user, bio }) {
         <label>Scholarship Name</label>
         <input type="text" id="SSName" placeholder="Roll"></input>
         <label>Amount</label>
-        <input type="number" id="SSAmt" placeholder="Roll"></input>
+        <input
+          type="number"
+          id="SSAmt"
+          placeholder="Enter Amount to transfer"
+        ></input>
         <label>Attendance Required</label>
-        <input type="number" id="Atn" placeholder="First Name"></input>
+        <input
+          type="number"
+          id="Atn"
+          placeholder="Attendance Requirement"
+        ></input>
         <label>Average Marks</label>
-        <input type="number" id="AvgMarks" placeholder="Last Name"></input>
+        <input
+          type="number"
+          id="AvgMarks"
+          placeholder="Marks Requirement"
+        ></input>
         <button type="submit">Add Scholarship Record</button>
       </form>
-      {/* <input
-        onChange={(e) => changeValue(e.target.value)}
-        value={value}
-      ></input>
-      <button onClick={() => updateBio()}>Update Bio</button> */}
+
       <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
     </div>
   );

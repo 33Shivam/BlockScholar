@@ -6,6 +6,7 @@ import axios from "axios";
 import abi from "../src/contracts/Staff.json";
 import { ethers } from "ethers";
 import { useConnect } from "wagmi";
+import StaffContractAddress from "../../contractAddresses.json";
 
 function Staff({ user, bio }) {
   //Student Contract Instance and wallet instamce
@@ -18,7 +19,7 @@ function Staff({ user, bio }) {
   const [account, setAccount] = useState("None");
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0x225169Bdf48d774817a3Ee96684F94E4D59bB6e0";
+      const contractAddress = StaffContractAddress.StaffAddress;
       const contractABI = abi.abi;
       try {
         const { ethereum } = window;
@@ -72,33 +73,34 @@ function Staff({ user, bio }) {
 
     location.reload();
   }
-  const addDetails = async (event) => {
+
+  const confirmSchlorsip = async (event) => {
     event.preventDefault();
     const { contract } = state;
     const ID = document.querySelector("#ID").value;
-    const firstName = document.querySelector("#firstName").value;
-    const lastName = document.querySelector("#lastName").value;
-    console.log(ID, firstName, lastName, contract);
-    const tx = await contract.addStuRecords(ID, firstName, lastName);
+    const Attendance = document.querySelector("#Atn").value;
+    const AvgMarks = document.querySelector("#AvgMarks").value;
+    console.log(ID, Attendance, AvgMarks);
+    const tx = await contract.resultNpay(ID, Attendance, AvgMarks);
     await tx.wait();
-    console.log("Transaction Mined");
-    const details = await contract.getStuDetails(3);
-    console.log(details);
+    const status = await contract.viewStatus(ID);
+    console.log(status);
   };
+
   return (
     <div>
       <h4>User session:</h4>
       <div>bio: {bio}</div>
       <div>Address: {user.address}</div>
       <br />
-      <form onSubmit={addDetails}>
+      <form onSubmit={confirmSchlorsip}>
         <label>Roll No</label>
         <input type="number" id="ID" placeholder="Roll"></input>
-        <label>First Name</label>
-        <input type="text" id="firstName" placeholder="First Name"></input>
-        <label>Last Name</label>
-        <input type="text" id="lastName" placeholder="Last Name"></input>
-        <button type="submit">Add your record</button>
+        <label>Attendance</label>
+        <input type="number" id="Atn" placeholder="Attendance"></input>
+        <label>Average marks</label>
+        <input type="number" id="AvgMarks" placeholder="Average Marks"></input>
+        <button type="submit">Confirm Scholarship</button>
       </form>
       {/* <input
         onChange={(e) => changeValue(e.target.value)}
