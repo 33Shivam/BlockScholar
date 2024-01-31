@@ -1,0 +1,67 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.section{
+    display: flex;
+    height: 94%;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+}
+.container{
+    max-width:100%;
+}
+
+.box{
+}
+.img{
+    object-fit: cover;
+    width: 400px;
+    height: 400px;
+    border-radius: var(--radius-2);
+}
+
+.flex1{
+    max-width: 100%;
+}
+.outlay1{
+    position: absolute;
+    z-index: -99;
+    left: 80%;
+}
+.outlay2{
+    position: absolute;
+    z-index: -99;
+    top: 48%;
+    right: 81%;
+}
+.outlay3{
+    position: absolute;
+    z-index: -99;
+    left: 52%;
+    top: 58%;
+}
+.outlay4{
+    position: absolute;
+    z-index: -99;
+    right: 89%;
+
+}
+/* 
+const orange = {
+    orange1: '#fefcfb',
+    orange2: '#fff7ed',
+    orange3: '#ffefd6',
+    orange4: '#ffdfb5',
+    orange5: '#ffd19a',
+    orange6: '#ffc182',
+    orange7: '#f5ae73',
+    orange8: '#ec9455',
+    orange9: '#f76b15',
+    orange10: '#ef5f00',
+    orange11: '#cc4e00',
+    orange12: '#582d1d',
+  } */

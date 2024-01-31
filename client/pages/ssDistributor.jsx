@@ -80,7 +80,7 @@ function Distributor({ user, bio }) {
     const { contract } = state;
     const ID = document.querySelector("#ID").value;
     const ScholarshipName = document.querySelector("#SSName").value;
-    const ScholarshipAmount = document.querySelector("#SSAmt").value; //100000000000000
+    const ScholarshipAmount = document.querySelector("#SSAmt").value; //transfer 100000000000000 for a significant change in amount
     const Attendance = document.querySelector("#Atn").value;
     const AvgMarks = document.querySelector("#AvgMarks").value;
     console.log(ID, ScholarshipName, ScholarshipAmount, Attendance, AvgMarks);

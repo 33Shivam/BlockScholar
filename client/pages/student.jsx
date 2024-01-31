@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import abi from "../src/contracts/StuDetails.json";
 import { ethers } from "ethers";
-import { useConnect } from "wagmi";
 import StuContractAddress from "../../contractAddresses.json";
+import { Card, Text, Section, Container } from "@radix-ui/themes";
 
 function Student({ user, bio }) {
   const StudentContractAddress = StuContractAddress.StudentAddress;
@@ -89,9 +89,11 @@ function Student({ user, bio }) {
   };
   return (
     <div>
-      <h4>User session:</h4>
-      <div>bio: {bio}</div>
-      <div>Address: {user.address}</div>
+      <Section>
+        <Container></Container>
+      </Section>
+      <div>Your Information: {bio}</div>
+      <div>Your Wallet Address: {user.address}</div>
       <br />
       <form onSubmit={addDetails}>
         <label>Roll No</label>
@@ -102,11 +104,7 @@ function Student({ user, bio }) {
         <input type="text" id="lastName" placeholder="Last Name"></input>
         <button type="submit">Add your record</button>
       </form>
-      {/* <input
-        onChange={(e) => changeValue(e.target.value)}
-        value={value}
-      ></input>
-      <button onClick={() => updateBio()}>Update Bio</button> */}
+
       <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
     </div>
   );
