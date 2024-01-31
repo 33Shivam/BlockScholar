@@ -6,8 +6,10 @@ import axios from "axios";
 import abi from "../src/contracts/StuDetails.json";
 import { ethers } from "ethers";
 import { useConnect } from "wagmi";
+import StuContractAddress from "../../contractAddresses.json";
 
 function Student({ user, bio }) {
+  const StudentContractAddress = StuContractAddress.StudentAddress;
   //Student Contract Instance and wallet instamce
 
   const [state, setState] = useState({
@@ -18,7 +20,8 @@ function Student({ user, bio }) {
   const [account, setAccount] = useState("None");
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0xBbd3D14d9298F236145bB9B1733837b01871B05E";
+      const contractAddress = StudentContractAddress;
+      console.log(contractAddress);
       const contractABI = abi.abi;
       try {
         const { ethereum } = window;
@@ -82,6 +85,8 @@ function Student({ user, bio }) {
     const tx = await contract.addStuRecords(ID, firstName, lastName);
     await tx.wait();
     console.log("Transaction Mined");
+    const details = await contract.getStuDetails(3);
+    console.log(details);
   };
   return (
     <div>

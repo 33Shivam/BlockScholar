@@ -1,55 +1,65 @@
 import { getSession, signOut } from "next-auth/react";
 import connectDB from "../lib/connectDB";
 import Users from "../lib/userSchema";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import abi from "../src/contracts/ScholarDetails.json";
+import { ethers } from "ethers";
+import { useConnect } from "wagmi";
+import DisContractAddress from "../../contractAddresses.json";
 
-function User({ user, bio }) {
-  //web3JS
-  // const [state, setState] = useState({
-  //   web3: null,
-  //   contract: null,
-  // });
-  // const [data, setData] = useState("0");
-  // useEffect(() => {
-  //   const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
+function Distributor({ user, bio }) {
+  const DistributorContractAddress = DisContractAddress.ScholarshipAddress;
 
-  //   async function template() {
-  //     const web3 = new Web3(provider);
-  //     const networkId = await web3.eth.net.getId();
-  //     const deployedNetwork = SimpleStorage.networks[networkId];
-  //     const contract = new web3.eth.Contract(
-  //       SimpleStorage.abi,
-  //       deployedNetwork.address
-  //     );
-  //     console.log(contract);
-  //     setState({ web3: web3, contract: contract });
-  //   }
-  //   provider && template();
-  // }, []);
-  // useEffect(() => {
-  //   const { contract } = state;
-  //   async function readData() {
-  //     const data = await contract.methods.getter().call();
-  //     setData(data);
-  //   }
-  //   contract && readData();
-  // }, [state]);
-  // async function writeData() {
-  //   const { contract } = state;
-  //   // const data = document.querySelector("#value").value;
-  //   await contract.methods
-  //     .setter(100000000000)
-  //     .send({ from: "0x487D6C2069A63FCf4e435613CB3ee63219d189b5" });
-  //   window.location.reload();
-  // }
+  //Student Contract Instance and wallet instamce
 
-  //web3JS ends
+  const [state, setState] = useState({
+    provider: null,
+    signer: null,
+    contract: null,
+  });
+  const [account, setAccount] = useState("None");
+  useEffect(() => {
+    const connectWallet = async () => {
+      const contractAddress = DistributorContractAddress;
+      const contractABI = abi.abi;
+      try {
+        const { ethereum } = window;
 
-  //   console.log(user);
+        if (ethereum) {
+          const account = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          window.ethereum.on("chainChanged", () => {
+            window.location.reload();
+          });
+
+          window.ethereum.on("accountsChanged", () => {
+            window.location.reload();
+          });
+
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const contract = new ethers.Contract(
+            contractAddress,
+            contractABI,
+            signer
+          );
+          setAccount(account);
+          setState({ provider, signer, contract });
+        } else {
+          alert("Please install metamask");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    connectWallet();
+  }, []);
+  // console.log(state);
+  //Student Contract Instance ends here
 
   const [value, changeValue] = useState("");
-
   async function updateBio() {
     const { data } = await axios.post(
       "/api/updateBio",
@@ -65,33 +75,56 @@ function User({ user, bio }) {
 
     location.reload();
   }
+
+  const addSchlRec = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
+    const ID = document.querySelector("#ID").value;
+    const ScholarshipName = document.querySelector("#SSName").value;
+    const ScholarshipAmount = document.querySelector("#SSAmt").value;
+    const Attendance = document.querySelector("#Atn").value;
+    const AvgMarks = document.querySelector("#AvgMarks").value;
+    console.log(ID, ScholarshipName, ScholarshipAmount, Attendance, AvgMarks);
+    const tx = await contract.addSchlRecords(
+      ID,
+      ScholarshipName,
+      ScholarshipAmount,
+      Attendance,
+      AvgMarks
+    );
+    await tx.wait();
+    console.log("Transaction Mined");
+  };
   return (
     <div>
       <h4>User session:</h4>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
       <div>bio: {bio}</div>
       <div>Address: {user.address}</div>
-      <p>Contract Data : {data}</p>
-      <div>
-        <input type="text" id="value" required="required"></input>
-      </div>
-
-      <button onClick={writeData} className="button button2">
-        Change Data
-      </button>
-
       <br />
-      <input
+      <form onSubmit={addSchlRec}>
+        <label>Roll No</label>
+        <input type="number" id="ID" placeholder="Roll"></input>
+        <label>Scholarship Name</label>
+        <input type="text" id="SSName" placeholder="Roll"></input>
+        <label>Amount</label>
+        <input type="number" id="SSAmt" placeholder="Roll"></input>
+        <label>Attendance Required</label>
+        <input type="number" id="Atn" placeholder="First Name"></input>
+        <label>Average Marks</label>
+        <input type="number" id="AvgMarks" placeholder="Last Name"></input>
+        <button type="submit">Add Scholarship Record</button>
+      </form>
+      {/* <input
         onChange={(e) => changeValue(e.target.value)}
         value={value}
       ></input>
-      <button onClick={() => updateBio()}>Update Bio</button>
-      {/* <button onClick={writeData}>writedata</button> */}
+      <button onClick={() => updateBio()}>Update Bio</button> */}
       <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
     </div>
   );
 }
 
+//server side redirect
 export async function getServerSideProps(context) {
   const session = await getSession(context);
 
@@ -116,4 +149,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default User;
+export default Distributor;

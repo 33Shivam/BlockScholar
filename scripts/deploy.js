@@ -1,77 +1,52 @@
-const hre = require("hardhat");
-async function getBalances(address) {
-  const balanceBigInt = await hre.ethers.provider.getBalance(address);
-  return hre.ethers.formatEther(balanceBigInt);
-}
 
-async function cosoleBalances(addresses) {
-  let counter = 0;
-  for (const address of addresses) {
-    console.log(`Address ${counter} balance:`, await getBalances(address));
-    counter++;
-  }
-}
+
+const hre = require("hardhat");
+const fs = require('fs');
+const ethers = hre.ethers;
+
 
 async function main() {
-  const [owner, from1, from2, from3] = await hre.ethers.getSigners();
   const StuDetails = await hre.ethers.getContractFactory("StuDetails");
   const contract = await StuDetails.deploy(); //instance of contract
-
   await contract.waitForDeployment();
-  console.log("Address of contract:", contract.target);
+ 
 
-  const addresses = [
-    owner.address,
-    from1.address,
+  console.log("Address of contract Student Details:", contract.target);
 
-    from2.address,
-    from3.address,
-  ];
-  console.log("Before buying chai");
-  await cosoleBalances(addresses);
-
-  // const amount = { value: hre.ethers.parseEther("10") };
-  await contract.connect(from1).addStuRecords(1, "Shivam", "Anand");
-  await contract.connect(from2).addStuRecords(2, "Satyam", "Anand");
-  await contract
-    .connect(from3)
-    .addStuRecords(3,"Sahil", "Gupta");
-
-  console.log("After buying chai");
-  await cosoleBalances(addresses);
-  console.log(contract.target);
-  let counter0 = 0;
-
-
-  for (const address of addresses) {
-    const StudentDetails = await contract.getStuDetails(counter0);
+  const ScholarDetails = await hre.ethers.getContractFactory("ScholarDetails");
+  const Amount = hre.ethers.parseEther("10");
+  const contract2 = await ScholarDetails.deploy(contract.target,{value:Amount}); //instance of contract
+  console.log("Address of contract scholarship:", contract2.target);
   
-    // Extract the first name from the returned result
-    const firstName = StudentDetails[1]; // Index 1 contains the first name
-  
-    // console.log("info", StudentDetails);
-    console.log(firstName)
-    counter0++;
-  }
 
-  
+  await contract2.waitForDeployment();
+
+
+  const Staff = await hre.ethers.getContractFactory("Staff");
+  const contract1 = await Staff.deploy(contract.target,contract2.target); //instance of contract
+  console.log("Address of Staff contract:", contract1.target);
+  await contract1.waitForDeployment();
+  await contract2.storeContractAdd(contract1.target);
+  const address = await contract2.contractStaffAdd();
+  console.log("Address of contract STaff Stored:", address);
+  const contractAddresses = {
+    StudentAddress: contract.target,
+    ScholarshipAddress: contract2.target,
+    StaffAddress: contract1.target,
+  };
+  fs.writeFileSync("contractAddresses.json", JSON.stringify(contractAddresses),"utf-8");
+
   
 }
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
+main()
+// .then((addresses) => {
+//   fs.writeFileSync("programming.txt", data);
+//   // Write contract addresses to a file
+  // fs.writeFileSync("contractAddresses.json", JSON.stringify(addresses, null, 2));
+//   console.log("Contract addresses written to contractAddresses.json file:", addresses);
+// })
+.catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
 
-
-
-
-
-
-
-///Points to noted 
-// 1. to get the address of the contract we use contract.target
-// 2. use waitforDeployment instead of deployed() as it is async function
-// 3. utils library is no longer used in hardhat hence instead of ethers.utils.parseEther we use ethers.parseEther

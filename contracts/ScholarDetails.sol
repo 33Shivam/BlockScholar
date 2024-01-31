@@ -16,6 +16,11 @@ contract ScholarDetails {
         StaffContractAdd = _StaffContractAdd;
     }
 
+    function contractStaffAdd() public view returns (address) {
+        address payable Address = StaffContractAdd;
+        return (Address);
+    }
+
     //This is mandatory for receiving ETH
     event ReceivedEth(uint256 amount);
 
