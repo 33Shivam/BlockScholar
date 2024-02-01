@@ -6,6 +6,9 @@ import axios from "axios";
 import abi from "../src/contracts/ScholarDetails.json";
 import { ethers } from "ethers";
 import DisContractAddress from "../../contractAddresses.json";
+import { Section, Container, Flex } from "@radix-ui/themes";
+import * as Form from "@radix-ui/react-form";
+import styles from "./css/distributor.module.css";
 
 function Distributor({ user, bio }) {
   const DistributorContractAddress = DisContractAddress.ScholarshipAddress;
@@ -97,6 +100,48 @@ function Distributor({ user, bio }) {
   };
   return (
     <div>
+      <Section>
+        <Container>
+          <Flex direction="row" justify="between">
+            <Flex>
+              <Form.Root className={styles.FormRoot}>
+                <Form.Field className={styles.FormField} name="email">
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "baseline",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Form.Label className={styles.FormLabel}>Email</Form.Label>
+                    <Form.Message
+                      className={styles.FormMessage}
+                      match="valueMissing"
+                    >
+                      Please enter your email
+                    </Form.Message>
+                    <Form.Message
+                      className={styles.FormMessage}
+                      match="typeMismatch"
+                    >
+                      Please provide a valid email
+                    </Form.Message>
+                  </div>
+                  <Form.Control asChild>
+                    <input className={styles.Input} type="email" required />
+                  </Form.Control>
+                </Form.Field>
+                <Form.Submit asChild>
+                  <button className={styles.Button} style={{ marginTop: 10 }}>
+                    Post question
+                  </button>
+                </Form.Submit>
+              </Form.Root>
+            </Flex>
+            <Flex></Flex>
+          </Flex>
+        </Container>
+      </Section>
       <h4>User session:</h4>
       <div>bio: {bio}</div>
       <div>Address: {user.address}</div>

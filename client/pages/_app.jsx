@@ -9,6 +9,7 @@ import { SessionProvider } from "next-auth/react";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import "./global.css";
+import NavigationMenuDemo from "../components/nav";
 
 const { provider, webSocketProvider } = configureChains(defaultChains, [
   publicProvider(),
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }) {
       {" "}
       <WagmiConfig client={client}>
         <SessionProvider session={pageProps.session} refetchInterval={0}>
+          {/* <NavigationMenuDemo /> */}
           <Component {...pageProps} />
         </SessionProvider>
       </WagmiConfig>

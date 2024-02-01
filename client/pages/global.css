@@ -4,7 +4,15 @@
 @import '@radix-ui/colors/purple.css';
 @import '@radix-ui/colors/violet.css';
 @import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/mauve.css';
 
+input,
+textarea {
+  all: unset;
+  box-sizing: border-box;
+}
 button,
 p {
   all: unset;
@@ -14,4 +22,13 @@ body{
     margin: 0px;
     overflow: hidden;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

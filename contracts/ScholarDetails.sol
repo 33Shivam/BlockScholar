@@ -158,8 +158,9 @@ contract ScholarDetails {
         address payable Provider = payable(schlRecords[_ID].Provider);
         uint256 Attendance = schlRecords[_ID].Attendance;
         uint256 AvgMark = schlRecords[_ID].AvgMark;
-        string memory Stat = schlRecords[_ID].Status;
-        return (ID, Amount, Provider, Attendance, AvgMark, Stat);
+        string memory ScholarshipName = schlRecords[_ID].ScholarshipName;
+
+        return (ID, Amount, Provider, Attendance, AvgMark, ScholarshipName);
     }
 
     //function to get the scholarship status

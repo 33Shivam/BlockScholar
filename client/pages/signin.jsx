@@ -185,7 +185,6 @@ function SignIn() {
           />
         </svg>
       </div>
-      <NavigationMenuDemo />
       <Section size="3" className={styles.section}>
         <Container size="4" className={styles.container}>
           <Flex
