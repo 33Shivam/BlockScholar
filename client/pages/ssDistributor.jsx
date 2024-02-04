@@ -144,12 +144,8 @@ function Distributor({ user, bio }) {
   // useEffect(() => {}, [contractBalance]);
 
   var detailStorage = new Array();
-  const [array, setArray] = useState([]);
-  function updateArray() {
-    getStuDetails();
-    setArray(detailStorage);
-    console.log(array);
-  }
+  const [array, setArray] = useState([[0, " ", " "]]);
+
   const getStuDetails = async (event) => {
     const { stuContract } = stustate;
     for (var i = 1; i < 999; i++) {
@@ -165,6 +161,11 @@ function Distributor({ user, bio }) {
       detailStorage[i] = detailsArray;
       // console.log(details);
     }
+    setArray(detailStorage);
+    console.log("Use State Array");
+    console.log(array);
+    console.log("Detail Storage");
+    console.log(detailStorage);
     // console.log(detailStorage);
   };
 
@@ -383,86 +384,73 @@ function Distributor({ user, bio }) {
                 </Form.Root>
               </Flex>
             </Card>
+
             <Flex direction="column" gap="3">
-              <Card>
-                <Text as="div" size="2" weight="bold">
-                  Your Wallet Address
-                </Text>
-                <Text as="div" color="gray" size="2">
-                  {user.address}
-                </Text>
-              </Card>
-              <Card>
-                <Text as="div" size="2" weight="bold">
-                  Your Information
-                </Text>
-                <Text as="div" color="gray" size="2">
-                  {bio}
-                </Text>
-              </Card>
-              <Card>
-                <Text as="div" size="2" weight="bold">
-                  Remaining Scholarship
-                </Text>
-                <Text as="div" color="gray" size="2">
-                  {contractBalance} Wei
-                </Text>
-              </Card>
-              <Card>
-                {/* <Table.Root>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.ColumnHeaderCell>
-                        Student ID
-                      </Table.ColumnHeaderCell>
-                      <Table.ColumnHeaderCell>
-                        First Name
-                      </Table.ColumnHeaderCell>
-                      <Table.ColumnHeaderCell>Last Name</Table.ColumnHeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-
-                  {detailStorage.map((stuDetail) => (
-                    <Table.Body>
+              <Flex direction="row" gap="3">
+                <Flex direction="column" gap="3" justify="center">
+                  <Card>
+                    <Text as="div" size="2" weight="bold">
+                      Your Wallet Address
+                    </Text>
+                    <Text as="div" color="gray" size="2">
+                      {user.address}
+                    </Text>
+                  </Card>
+                  <Card>
+                    <Text as="div" size="2" weight="bold">
+                      Your Information
+                    </Text>
+                    <Text as="div" color="gray" size="2">
+                      {bio}
+                    </Text>
+                  </Card>
+                  <Card>
+                    <Text as="div" size="2" weight="bold">
+                      Remaining Scholarship
+                    </Text>
+                    <Text as="div" color="gray" size="2">
+                      {contractBalance} Wei
+                    </Text>
+                  </Card>
+                </Flex>
+                <Card>
+                  <Table.Root>
+                    <Table.Header>
                       <Table.Row>
-                        <Table.RowHeaderCell>
-                          {" "}
-                          {stuDetail[0]}
-                        </Table.RowHeaderCell>
-                        <Table.Cell>{stuDetail[1]}</Table.Cell>
-                        <Table.Cell>{stuDetail[2]}</Table.Cell>
+                        <Table.ColumnHeaderCell>
+                          Student ID
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>
+                          First Name
+                        </Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>
+                          Last Name
+                        </Table.ColumnHeaderCell>
                       </Table.Row>
-                    </Table.Body>
-                  ))}
-                </Table.Root> */}
+                    </Table.Header>
 
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Pages</th>
-                    </tr>
-                  </thead>
-                  {array.map(method => (
-                    <tbody>
-                        <tr>
-                            <td rowspan={method.pagesName.length + 1}>{method.id}</td>
-                            <td rowspan={method.pagesName.length + 1}>{method.name}</td>
-                        </tr>
-                        
-                    </tbody>
-                ))}
-                </table>
-              </Card>
+                    <Table.Body>
+                      {/* Mapping each student detail to a table row */}
+                      {array.map((stuDetail, index) => (
+                        <Table.Row key={index}>
+                          <Table.RowHeaderCell>
+                            {stuDetail[0]}
+                          </Table.RowHeaderCell>
+                          <Table.Cell>{stuDetail[1]}</Table.Cell>
+                          <Table.Cell>{stuDetail[2]}</Table.Cell>
+                        </Table.Row>
+                      ))}
+                    </Table.Body>
+                  </Table.Root>
+                </Card>
+              </Flex>
               <Button
                 onClick={() => {
                   getContractBalance();
                   getStuDetails();
-                  updateArray();
                 }}
               >
-                GetInfo
+                Get Info
               </Button>
               <Button onClick={() => signOut({ redirect: "/signin" })}>
                 Logout
