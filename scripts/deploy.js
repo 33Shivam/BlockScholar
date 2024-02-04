@@ -25,8 +25,6 @@ async function main() {
   console.log("Address of Staff contract:", contract1.target);
   await contract1.waitForDeployment();
   await contract2.storeContractAdd(contract1.target);
-  const address = await contract2.contractStaffAdd();
-  console.log("Address of contract STaff Stored:", address);
   const contractAddresses = {
     StudentAddress: contract.target,
     ScholarshipAddress: contract2.target,

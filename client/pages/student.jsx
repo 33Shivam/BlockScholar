@@ -1,7 +1,7 @@
 import { getSession, signOut } from "next-auth/react";
 import connectDB from "../lib/connectDB";
 import Users from "../lib/userSchema";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import axios from "axios";
 import abi from "../src/contracts/StuDetails.json";
 import abiSch from "../src/contracts/ScholarDetails.json";
@@ -21,6 +21,7 @@ import {
 import NavigationMenuDemo from "../components/nav";
 import * as Form from "@radix-ui/react-form";
 import styles from "./css/student.module.css";
+import { set } from "mongoose";
 
 function Student({ user, bio }) {
   const StudentContractAddress = StuContractAddress.StudentAddress;
@@ -34,6 +35,7 @@ function Student({ user, bio }) {
 
   const [ssName, setSSName] = useState("No Schlorships");
   const [ssStatus, SSsetStatus] = useState("Not Applied/Assigned");
+  const [amt, setAmt] = useState(0);
   const [state1, setState1] = useState({
     provider: null,
     signer: null,
@@ -116,26 +118,37 @@ function Student({ user, bio }) {
     const tx = await contract.addStuRecords(ID, firstName, lastName);
     await tx.wait();
     console.log("Transaction Mined");
-    const details = await contract.getStuDetails(ID);
+
+    for (var i = 1; i < 999; i++) {
+      const details = await contract.getStuDetails(i);
+      if (details[3] === "0x0000000000000000000000000000000000000000") {
+        break;
+      }
+      console.log(details);
+    }
+    const details = await contract.getStuDetails(10);
     console.log(details);
+    console.log(details[0].toString());
   };
 
   const schlRec = async (event) => {
     event.preventDefault();
     const { contract2 } = state1;
     const ID = document.querySelector("#ID").value;
-    const schlDetails = await contract2.getSchlDetails(ID);
+    const schlDetails = await contract2.getSchlDetailsFrontend(ID);
     const status = await contract2.getStatus(ID);
-    setSSName(schlDetails[5]);
+    setAmt(schlDetails[0].toString());
+    setSSName(schlDetails[1]);
     SSsetStatus(status);
   };
-  useEffect(() => {}, [ssName]);
-  console.log(ssName);
-  useEffect(() => {}, [ssStatus]);
-  console.log(ssStatus);
+  // useEffect(() => {}, [ssName]);
+  // console.log(ssName);
+  // useEffect(() => {}, [amt]);
+  // useEffect(() => {}, [ssStatus]);
+  // console.log(ssStatus);
 
   return (
-    <div onLoad={schlRec}>
+    <div>
       {" "}
       <div className={styles.outlay1}>
         <svg
@@ -298,16 +311,18 @@ function Student({ user, bio }) {
                     <Button
                       size="2"
                       type="submit"
-                      style={{ marginTop: "12px" }}
+                      style={{ marginTop: "12px", width: "100%" }}
                     >
                       Submit
                       <ArrowRightIcon />
                     </Button>
                   </Form.Submit>
                 </Form.Root>
-                <Text color="gray" size="1">
-                  or Enter Details And Press Get your Status
-                </Text>
+                <Button onClick={schlRec} size="2" variant="outline">
+                  {" "}
+                  Get your Status
+                  <ArrowRightIcon />
+                </Button>
               </Flex>
             </Card>
             <Flex direction="column" gap="3">
@@ -343,7 +358,14 @@ function Student({ user, bio }) {
                   {ssStatus}
                 </Text>
               </Card>
-              <Button onClick={schlRec}> Get your Status</Button>
+              <Card>
+                <Text as="div" size="2" weight="bold">
+                  Amount Assigned
+                </Text>
+                <Text as="div" color="gray" size="2">
+                  {amt} Wei
+                </Text>
+              </Card>
 
               <Button onClick={() => signOut({ redirect: "/signin" })}>
                 {" "}

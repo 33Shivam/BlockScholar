@@ -1,0 +1,91 @@
+.FormRoot {
+    width: 260px;
+  }
+  
+  .FormField {
+    display: grid;
+    margin-bottom: 8px;
+  }
+  
+  .FormLabel {
+    position: relative;
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 35px;
+    color: rgb(133, 133, 133);
+    top:4px
+
+    
+  }
+  
+  .FormMessage {
+    position: relative;
+    font-size: 10px;
+    color: rgb(0, 0, 0);
+    opacity: 0.8;
+    top: 64px;   
+}
+  
+  .Input,
+  .Textarea {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  
+    font-size: 15px;
+    color: black;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px var(--black-a9);
+  }
+  .Input:hover,
+  .Textarea:hover {
+    box-shadow: 0 0 0 1px black;
+  }
+  .Input:focus,
+  .Textarea:focus {
+    box-shadow: 0 0 0 2px black;
+  }
+  .Input::selection,
+  .Textarea::selection {
+    background-color: var(--black-a9);
+    color: white;
+  }
+  
+  .Input {
+    padding: 0 10px;
+    height: 35px;
+    line-height: 1;
+  }
+  
+  .Textarea {
+    resize: none;
+    padding: 10px;
+  }
+  
+
+  .outlay1{
+    position: absolute;
+    z-index: -99;
+    left: 80%;
+}
+.outlay2{
+    position: absolute;
+    z-index: -99;
+    top: 48%;
+    right: 81%;
+}
+.outlay3{
+    position: absolute;
+    z-index: -99;
+    left: 52%;
+    top: 58%;
+}
+.outlay4{
+    position: absolute;
+    z-index: -99;
+    right: 89%;
+
+}
+  

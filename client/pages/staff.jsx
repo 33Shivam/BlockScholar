@@ -7,6 +7,20 @@ import abi from "../src/contracts/Staff.json";
 import { ethers } from "ethers";
 import { useConnect } from "wagmi";
 import StaffContractAddress from "../../contractAddresses.json";
+import {
+  Section,
+  Container,
+  Grid,
+  Box,
+  Heading,
+  Flex,
+  Text,
+  Button,
+  Card,
+} from "@radix-ui/themes";
+import * as Form from "@radix-ui/react-form";
+import styles from "./css/staff.module.css";
+import NavigationMenuDemo from "../components/nav";
 
 function Staff({ user, bio }) {
   //Student Contract Instance and wallet instamce
@@ -83,13 +97,137 @@ function Staff({ user, bio }) {
     console.log(ID, Attendance, AvgMarks);
     const tx = await contract.resultNpay(ID, Attendance, AvgMarks);
     await tx.wait();
-    const status = await contract.viewStatus(ID);
-    console.log(status);
   };
 
   return (
     <div>
-      <h4>User session:</h4>
+      <NavigationMenuDemo />
+      <Section>
+        <Container>
+          <Flex direction="row" justify="between">
+            <Flex>
+              <Card size="5">
+                <Flex direction="column">
+                  <Heading>Initiate Scholarship</Heading>
+                  <Form.Root
+                    className={styles.FormRoot}
+                    onSubmit={confirmSchlorsip}
+                  >
+                    <Form.Field className={styles.FormField} name="Roll Number">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "baseline",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Form.Label className={styles.FormLabel}>
+                          Student Roll Number
+                        </Form.Label>
+                        <Form.Message
+                          className={styles.FormMessage}
+                          match="valueMissing"
+                        >
+                          Please Enter Roll Number
+                        </Form.Message>
+                      </div>
+                      <Form.Control asChild>
+                        <input
+                          className={styles.Input}
+                          type="number"
+                          required
+                          id="ID"
+                        />
+                      </Form.Control>
+                    </Form.Field>
+
+                    <Form.Field className={styles.FormField} name="Attendance">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "baseline",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Form.Label className={styles.FormLabel}>
+                          Student's Attendance
+                        </Form.Label>
+                        <Form.Message
+                          className={styles.FormMessage}
+                          match="valueMissing"
+                        >
+                          Please Enter Required Attendance
+                        </Form.Message>
+                      </div>
+                      <Form.Control asChild>
+                        <input
+                          className={styles.Input}
+                          type="Number"
+                          required
+                          id="Atn"
+                        />
+                      </Form.Control>
+                    </Form.Field>
+                    <Form.Field className={styles.FormField} name="CGPA">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "baseline",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Form.Label className={styles.FormLabel}>
+                          Student's CGPA
+                        </Form.Label>
+                        <Form.Message
+                          className={styles.FormMessage}
+                          match="valueMissing"
+                        >
+                          Please Enter a Value
+                        </Form.Message>
+                      </div>
+                      <Form.Control asChild>
+                        <input
+                          className={styles.Input}
+                          type="number"
+                          required
+                          id="AvgMarks"
+                        />
+                      </Form.Control>
+                    </Form.Field>
+                    <Form.Submit asChild>
+                      <Button> Verify And Send</Button>
+                    </Form.Submit>
+                  </Form.Root>
+                </Flex>
+              </Card>
+            </Flex>
+            <Flex direction="column" gap="3">
+              <Card>
+                <Text as="div" size="2" weight="bold">
+                  Your Wallet Address
+                </Text>
+                <Text as="div" color="gray" size="2">
+                  {user.address}
+                </Text>
+              </Card>
+              <Card>
+                <Text as="div" size="2" weight="bold">
+                  Your Information
+                </Text>
+                <Text as="div" color="gray" size="2">
+                  {bio}
+                </Text>
+              </Card>
+
+              <Button onClick={() => signOut({ redirect: "/signin" })}>
+                Logout
+              </Button>
+            </Flex>
+          </Flex>
+        </Container>
+      </Section>
+      {/* <h4>User session:</h4>
       <div>bio: {bio}</div>
       <div>Address: {user.address}</div>
       <br />
@@ -101,13 +239,13 @@ function Staff({ user, bio }) {
         <label>Average marks</label>
         <input type="number" id="AvgMarks" placeholder="Average Marks"></input>
         <button type="submit">Confirm Scholarship</button>
-      </form>
+      </form> */}
       {/* <input
         onChange={(e) => changeValue(e.target.value)}
         value={value}
       ></input>
       <button onClick={() => updateBio()}>Update Bio</button> */}
-      <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
+      {/* <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button> */}
     </div>
   );
 }

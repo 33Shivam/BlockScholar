@@ -4,7 +4,7 @@ pragma solidity >=0.8.2 <0.9.0;
 import "./StuDetails.sol";
 
 contract ScholarDetails {
-    //Get the addresses of another 2 contracts
+    //Get the addresses of another 3 contracts
     address StuContractAdd;
     address payable StaffContractAdd;
 
@@ -14,11 +14,6 @@ contract ScholarDetails {
 
     function storeContractAdd(address payable _StaffContractAdd) public {
         StaffContractAdd = _StaffContractAdd;
-    }
-
-    function contractStaffAdd() public view returns (address) {
-        address payable Address = StaffContractAdd;
-        return (Address);
     }
 
     //This is mandatory for receiving ETH
@@ -33,8 +28,8 @@ contract ScholarDetails {
     }
 
     //view the amount converted
-    // function  viewGBPWEI(uint256 _number) public pure view  returns (uint256) {
-    // 	uint256 price = (_number)*62539;
+    // function viewGBPWEI(uint256 _number) public view returns (uint256) {
+    //     uint256 price = p.getGBPWEI(_number);
     //     return price;
     // }
 
@@ -65,8 +60,7 @@ contract ScholarDetails {
     ) public payable {
         //Convert the amount from GBP to wei
         // PriceConversion p = PriceConversion(PriceContractAdd);
-        // uint256 cvrAmt = p.getGBPWEI(_Amount);
-        uint256 cvrAmt = (_Amount) * 62539;
+        uint256 cvrAmt = (_Amount) * 1000000000000000000;
 
         //Show error if there is not enough balance to offer the scholarship
         require(
@@ -158,9 +152,21 @@ contract ScholarDetails {
         address payable Provider = payable(schlRecords[_ID].Provider);
         uint256 Attendance = schlRecords[_ID].Attendance;
         uint256 AvgMark = schlRecords[_ID].AvgMark;
-        string memory ScholarshipName = schlRecords[_ID].ScholarshipName;
+        string memory Stat = schlRecords[_ID].Status;
+        return (ID, Amount, Provider, Attendance, AvgMark, Stat);
+    }
 
-        return (ID, Amount, Provider, Attendance, AvgMark, ScholarshipName);
+    function getSchlDetailsFrontend(
+        uint256 _ID
+    ) public view returns (uint256, string memory, string memory) {
+        uint256 Amount = schlRecords[_ID].Amount;
+        string memory ScholarshipName = schlRecords[_ID].ScholarshipName;
+        string memory Stat = schlRecords[_ID].Status;
+        return (Amount, ScholarshipName, Stat);
+    }
+
+    function getSchlRemaining() public view returns (uint256) {
+        return address(this).balance;
     }
 
     //function to get the scholarship status
