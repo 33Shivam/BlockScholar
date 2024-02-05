@@ -81,6 +81,8 @@ function Distributor({ user, bio }) {
           );
           setAccount(account);
           setState({ provider, signer, contract });
+          console.log(state);
+          console.log(stustate);
           setstuState({ provider, signer, stuContract });
         } else {
           alert("Please install metamask");
@@ -413,36 +415,6 @@ function Distributor({ user, bio }) {
                     </Text>
                   </Card>
                 </Flex>
-                <Card>
-                  <Table.Root>
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.ColumnHeaderCell>
-                          Student ID
-                        </Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>
-                          First Name
-                        </Table.ColumnHeaderCell>
-                        <Table.ColumnHeaderCell>
-                          Last Name
-                        </Table.ColumnHeaderCell>
-                      </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
-                      {/* Mapping each student detail to a table row */}
-                      {array.map((stuDetail, index) => (
-                        <Table.Row key={index}>
-                          <Table.RowHeaderCell>
-                            {stuDetail[0]}
-                          </Table.RowHeaderCell>
-                          <Table.Cell>{stuDetail[1]}</Table.Cell>
-                          <Table.Cell>{stuDetail[2]}</Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table.Root>
-                </Card>
               </Flex>
               <Button
                 onClick={() => {
@@ -456,6 +428,26 @@ function Distributor({ user, bio }) {
                 Logout
               </Button>
             </Flex>
+            <Table.Root variant="surface">
+              <Table.Header>
+                <Table.Row>
+                  <Table.ColumnHeaderCell>Student ID</Table.ColumnHeaderCell>
+                  <Table.ColumnHeaderCell>First Name</Table.ColumnHeaderCell>
+                  <Table.ColumnHeaderCell>Last Name</Table.ColumnHeaderCell>
+                </Table.Row>
+              </Table.Header>
+
+              <Table.Body>
+                {/* Mapping each student detail to a table row */}
+                {array.map((stuDetail, index) => (
+                  <Table.Row key={index}>
+                    <Table.RowHeaderCell>{stuDetail[0]}</Table.RowHeaderCell>
+                    <Table.Cell>{stuDetail[1]}</Table.Cell>
+                    <Table.Cell>{stuDetail[2]}</Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
           </Flex>
         </Container>
       </Section>
