@@ -1,14 +1,38 @@
-# Project Name
+# Project Block Scholar
 
-Brief description of what the project does.
+### Inspiration
+The early inspiration of the project is from the recent Russia Ukraine War. During the war the economy of the country crashes. The indian students who were studying in the country were made to return back to India
+with no support for their countinued education back home. This combined with non-trasparency in current scholarship distribution process made us to believe that a decentralized solution was needed in this sector.
+
+### What is this project 
+BlockScholar is a project made for a trasparent automatic distribution web application.
 
 ## Prerequisites
 
-List any software, libraries, or dependencies that need to be installed before running the code.
+For Local deployment you need Gancahe Blockchain:- https://trufflesuite.com/ganache/ which is EVM compatible blockchain.
+Git Bash
+Node :- v18.17.0
+Moralis API key
+MongoDB URI
 
 ## Installation
 
-Provide step-by-step instructions on how to install any dependencies and set up the project environment.
+### Cloning the repo 
+```bash
+git clone https://github.com/33Shivam/BlockScholar.git
+```
+### Installing Hardhat Dependencies 
+```bash
+npm install
+```
+### Installing Frontend Dependencies 
+```bash
+cd client
+```
+```bash
+npm install
+```
+
 
 ## Usage
 
